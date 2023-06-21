@@ -1,10 +1,15 @@
-variable "tgw_name" {
-  description = "Name to be used on all the resources as identifier for Transit Gateway"
+variable "region" {
+  description = "List of Allowed AWS account IDs"
   type        = string
 }
 
-variable "tgw_id" {
-  description = "Identifier of AWS Transit Gateway"
+variable "account_id" {
+  description = "Allowed AWS account IDs"
+  type        = string
+}
+
+variable "prefix" {
+  description = "prefix for aws resources and tags"
   type        = string
 }
 
@@ -14,8 +19,24 @@ variable "vpc_id" {
 }
 
 variable "subnet_ids" {
-  description = "Identifiers of Subnets"
+  description = "Set of VPC Subnet ID-s for the subnet group. At least one subnet must be provided"
   type        = list(string)
+  default     = []
+}
+
+variable "tags" {
+  description = "tag map"
+  type        = map(string)
+}
+
+variable "tgw_id" {
+  description = "Identifier of AWS Transit Gateway"
+  type        = string
+}
+
+variable "tgw_attachment_name" {
+  description = "Name to be used on all the resources as identifier for Transit Gateway Attachment"
+  type        = string
 }
 
 variable "enable_dns_support" {
@@ -46,9 +67,4 @@ variable "transit_gateway_default_route_table_propagation" {
   description = "Boolean whether the VPC Attachment should propagate routes with the EC2 Transit Gateway propagation default route table"
   type        = bool
   default     = true
-}
-
-variable "env" {
-  description = "Environment"
-  type        = string
 }
